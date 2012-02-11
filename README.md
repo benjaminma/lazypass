@@ -2,4 +2,4 @@
 v0.1
 
 ##Summary:
-A simple and secure password remembering tool for lazy folks.
+A simple and secure password remembering tool for you.
