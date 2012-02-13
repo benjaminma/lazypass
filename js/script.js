@@ -12,21 +12,30 @@ function isk_KeyUp() {
 	// TODO: Test for input delay/intent
 }
 
+function loadCharacterSet() {
+	// TODO: Select character set
+	var charSet = "abc123"
+	// TODO: Filter user options (lower case, numbers, look-a-likes)
+
+	return charSet;
+}
+
 function generateLazypass(seed) {
 	var DEBUG = "";
 	
-	// TODO: Select character set
-	var charSet = "abc123"
-	// TODO: Filter user options
-
-	// Seed PRNG
-	Math.seedrandom(seed);
+	var charSet = loadCharacterSet();
 
 	// Generate random numbers
+	Math.seedrandom(seed);
 	var randomSet = [];
-	for (i=0; i<100; i+=1) {
-		randomSet[i] = Math.floor(Math.random() * charSet.length);
-		DEBUG += randomSet[i];
+	var idx;
+	for (idx=0; idx<100; idx+=1) {
+		randomSet[idx] = Math.floor(Math.random() * charSet.length);
+	}
+
+	// Test set
+	for (idx=0; idx<100; idx+=1) {
+		DEBUG += charSet[randomSet[idx]];
 	}
 
 	// TODO: Build lazypass table
