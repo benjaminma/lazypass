@@ -41,6 +41,7 @@
 
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
+  <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </head>
 
 <body>
@@ -55,7 +56,7 @@
       </section>
       <section id="lp-options">
         <form autocomplete="off">
-          <label for="secret-key">Secret key:</label><input id="input-secret-key" type="text" name="secret-key" />
+          <label for="secret-key">Secret key:</label><input id="input-secret-key" type="text" name="secret-key" value="testing livereload" />
         </form>
       </section>
     </div>
