@@ -13,10 +13,12 @@ function isk_KeyUp() {
 }
 
 function generateLazypass(seed) {
-	document.write("generateLazypass()");
 	// TODO: Select character set
 	// TODO: Filter user options
 	// TODO: Seed PRNG
+	Math.seedrandom(seed);
 	// TODO: Generate random numbers
 	// TODO: Build lazypass table
+
+	document.write("seedrandom:" + Math.random());
 }
