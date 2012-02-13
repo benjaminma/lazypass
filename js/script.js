@@ -5,11 +5,19 @@ function init() {
 	isk.keyup(isk_KeyUp);
 }
 
+var timerKeyUp = 0;
 function isk_KeyUp() {
-	var seed = $("#input-secret-key").val();
-	generateLazypass(seed);
+	clearTimeout(timerKeyUp);
+	timerKeyUp = setTimeout(checkSecretKey, 333);
+}
 
-	// TODO: Test for input delay/intent
+var prevSeed = "";
+function checkSecretKey() {	
+	var seed = $("#input-secret-key").val();	
+	if (seed !== prevSeed) {
+		generateLazypass(seed);
+		prevSeed = seed;	
+	}
 }
 
 function loadCharacterSet() {
