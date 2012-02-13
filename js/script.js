@@ -34,14 +34,23 @@ function generateLazypass(seed) {
 	var charSet = loadCharacterSet();
 
 	// Generate random numbers
-	Math.seedrandom(seed);
 	var randomSet = [];
 	var idx;
-	for (idx=0; idx<100; idx+=1) {
-		randomSet[idx] = Math.floor(Math.random() * charSet.length);
+	if (seed === "") {
+		// Preview character set
+		// TODO: or if seed matches placeholder
+		for (idx=0; idx<100; idx+=1) {
+			randomSet[idx] = idx % charSet.length;
+		}		
+	}
+	else {
+		Math.seedrandom(seed);
+		for (idx=0; idx<100; idx+=1) {
+			randomSet[idx] = Math.floor(Math.random() * charSet.length);
+		}		
 	}
 
-	// Test set
+	// DEBUG: Test set
 	for (idx=0; idx<100; idx+=1) {
 		DEBUG += charSet[randomSet[idx]];
 	}
