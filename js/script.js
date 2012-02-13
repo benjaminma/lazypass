@@ -39,6 +39,6 @@ function generateLazypass(seed) {
 	}
 
 	// TODO: Build lazypass table
-
-	document.write(DEBUG);
+	var holder = $("#lp-holder");
+	holder.html(DEBUG);
 }
