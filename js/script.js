@@ -3,6 +3,7 @@ window.onload = init;
 function init() {
 	var isk = $("#input-secret-key");
 	isk.keyup(isk_KeyUp);
+	generateLazypass("");
 }
 
 var timerKeyUp = 0;
@@ -22,7 +23,7 @@ function checkSecretKey() {
 
 function loadCharacterSet() {
 	// TODO: Select character set
-	var charSet = "abc123"
+	var charSet = "abcd1234"
 	// TODO: Filter user options (lower case, numbers, look-a-likes)
 
 	return charSet;
