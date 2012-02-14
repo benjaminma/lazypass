@@ -21,37 +21,38 @@ function checkSecretKey() {
 	}
 }
 
+// TODO: Select character set
+// TODO: Filter user options (lower case, numbers, look-a-likes)
 function loadCharacterSet() {
-	// TODO: Select character set
 	var charSet = "abcd1234"
-	// TODO: Filter user options (lower case, numbers, look-a-likes)
-
 	return charSet;
 }
 
-function generateLazypass(seed) {
-	var DEBUG = "";
-	
-	var charSet = loadCharacterSet();
-
-	// Generate random numbers
+// TODO: Preview character set if seed matches placeholder
+function generateRandomSet(seed, max) {
 	var randomSet = [];
-	var idx;
 	if (seed === "") {
 		// Preview character set
-		// TODO: or if seed matches placeholder
 		for (idx=0; idx<100; idx+=1) {
-			randomSet[idx] = idx % charSet.length;
+			randomSet[idx] = idx % max;
 		}		
 	}
 	else {
 		Math.seedrandom(seed);
 		for (idx=0; idx<100; idx+=1) {
-			randomSet[idx] = Math.floor(Math.random() * charSet.length);
+			randomSet[idx] = Math.floor(Math.random() * max);
 		}		
 	}
+	return randomSet;
+}
+
+function generateLazypass(seed) {
+	var DEBUG = "";
+	var charSet = loadCharacterSet();
+	var randomSet = generateRandomSet(seed, charSet.length);
 
 	// DEBUG: Test set
+	var idx;
 	for (idx=0; idx<100; idx+=1) {
 		DEBUG += charSet[randomSet[idx]];
 	}
