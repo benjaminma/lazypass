@@ -1,9 +1,68 @@
+// http://jsonlint.com/
+var jsonCharSets = {
+	"charSets": [
+		{
+			"name": "English alphabet",
+			"set": "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890",
+			"masks": [
+				{
+					"name": "numbers",
+					"mask": "1234567890"
+				},
+				{
+					"name": "lookalikes",
+					"mask": "ijlI1rnmckOo0psuvwxz"
+				},
+				{
+					"name": "lcase",
+					"mask": "abcdefghijklmnopqrstuvwxyz"
+				}
+			]
+		},
+		{
+			"name": "QWERTY left hand",
+			"set": "QqWwEeRrTtAaSsDdFfGgZzXxCcVvBb12345",			
+			"masks": [
+				{
+					"name": "numbers",
+					"mask": "12345"
+				},
+				{
+					"name": "lookalikes",
+					"mask": "ijlI1rnmckOo0psuvwxz"
+				},
+				{
+					"name": "lcase",
+					"mask": "qwertasdfgzxcvb"
+				}
+			]			
+		},
+		{
+			"name": "Numbers only",
+			"set": "1234567890"		
+		}
+	]
+};
+
 window.onload = init;
 
 function init() {
 	var isk = $("#input-secret-key");
 	isk.keyup(isk_KeyUp);
+	setupForm();
 	generateLazypass("");
+}
+
+function setupForm() {
+	var cs = $("#character-set");
+	var html = "";
+	var idx;
+	for (idx=0; idx<jsonCharSets.charSets.length; idx+=1) {
+		html += "<option>";
+		html += jsonCharSets.charSets[idx].name;
+		html += "</option>";
+	}
+	cs.html(html);
 }
 
 var timerKeyUp = 0;
