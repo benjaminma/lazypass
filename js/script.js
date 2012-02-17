@@ -25,7 +25,7 @@ function checkSecretKey() {
 // TODO: Filter user options (lower case, numbers, look-a-likes)
 function loadCharacterSet() {
 	var charSet = "abcd1234"
-	return charSet;
+	return charSet.toUpperCase();
 }
 
 // TODO: Preview character set if seed matches placeholder
@@ -47,17 +47,27 @@ function generateRandomSet(seed, max) {
 }
 
 function generateLazypass(seed) {
-	var DEBUG = "";
 	var charSet = loadCharacterSet();
 	var randomSet = generateRandomSet(seed, charSet.length);
 
-	// DEBUG: Test set
-	var idx;
-	for (idx=0; idx<100; idx+=1) {
-		DEBUG += charSet[randomSet[idx]];
+	var holder = $("#lp-holder");
+	if (holder.children()) {
+		holder.children().remove();
 	}
 
-	// TODO: Build lazypass table
-	var holder = $("#lp-holder");
-	holder.html(DEBUG);
+	// Build lazypass table
+	var html = "<table><tbody>"
+	var currChar;
+	var jdx;
+	for (idx=0; idx<9; idx+=1) {
+		html += "<tr>";
+		for (jdx=0; jdx<9; jdx+=1) {
+			currChar = charSet[randomSet[idx*9+jdx]];
+			html += "<td>";
+			html += currChar;
+			html += "</td>";
+		}
+		html += "</tr>";
+	}
+	holder.html(html);
 }
