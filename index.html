@@ -50,7 +50,7 @@
 
   <div id="container">
     <header>
-      <h1>Lazypass</h1>
+      <h1></h1>
     </header>
     <div id="main" role="main">
       <section id="lp-table">
@@ -58,13 +58,22 @@
       </section>
       <section id="lp-options">
         <form autocomplete="off">
-          <label for="secret-key">Secret key for your password:</label>
-          <input id="input-secret-key" type="text" name="secret-key" required autofocus placeholder="remember this!" />
+          <label for="input-secret-key">Secret key for your password:</label>
+          <input id="input-secret-key" type="text" required autofocus placeholder="remember this!" />
+          <label for="character-set">Character set:</label>
+          <select id="character-set">
+          </select>
+          <label for="mask-numbers">Include numbers:</label>
+          <input id="mask-numbers" type="checkbox" value="mask-numbers" />
+          <label for="mask-lookalikes">Include look-a-likes:</label>
+          <input id="mask-lookalikes" type="checkbox" value="mask-lookalikes" />
+          <label for="mask-lcase">Use lower case letters:</label>
+          <input id="mask-lcase" type="checkbox" value="mask-lcase" />
         </form>
       </section>
     </div>
     <footer>
-
+      <a href="http://github.com/benjaminma/lazypass">github</a>
     </footer>
   </div> <!--! end of #container -->
 
@@ -91,6 +100,5 @@
     g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
     s.parentNode.insertBefore(g,s)}(document,"script"));
   </script> -->
-
 </body>
 </html>
