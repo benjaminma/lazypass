@@ -49,12 +49,27 @@ window.onload = init;
 function init() {
 	var isk = $("#input-secret-key");
 	isk.keyup(isk_KeyUp);
-	setupForm();
+	var csm = $("#character-set-menu");
+	csm.change(csm_Change);
+
+	loadCharacterSets();
+	csm_Change();
 	generateLazypass("");
 }
 
-function setupForm() {
-	var cs = $("#character-set");
+function csm_Change() {
+	var csm = $("#character-set-menu")[0];
+	var idx = csm.selectedIndex;
+	filterCharacterSetOptions(idx);
+}
+
+// TODO: Enable/disable mask options
+function filterCharacterSetOptions(index) {
+	document.title = index;
+}
+
+function loadCharacterSets() {
+	var csm = $("#character-set-menu");
 	var html = "";
 	var idx;
 	for (idx=0; idx<jsonCharSets.charSets.length; idx+=1) {
@@ -62,7 +77,7 @@ function setupForm() {
 		html += jsonCharSets.charSets[idx].name;
 		html += "</option>";
 	}
-	cs.html(html);
+	csm.html(html);
 }
 
 var timerKeyUp = 0;
