@@ -130,10 +130,34 @@ function checkSecretKey() {
 	}
 }
 
-// TODO: Load character set
-// TODO: Filter set by user options
 function loadCharacterSet() {
-	var charSet = "abc";
+	var charSet = "";
+	var csm = $("#character-set-menu")[0];
+	var idx = csm.selectedIndex;
+	var currSet = jsonCharSets.charSets[idx];
+	charSet = currSet.set;
+
+	// Filter set by user options
+	var mask;
+	var jdx;
+	if (currSet.masks) {
+		for (jdx=0; jdx<currSet.masks.length; jdx+=1) {
+			mask = currSet.masks[jdx].mask;
+			charSet = filterSetByMask(charSet, mask);
+		}		
+	}
+
+	if (!charSet || charSet.length < 1) {
+		charSet = "X";
+	}
+	return charSet;
+}
+
+function filterSetByMask(charSet, mask) {
+	if (!mask || mask.length < 1) {
+		return charSet;
+	}
+	
 	return charSet;
 }
 
@@ -155,6 +179,7 @@ function generateRandomSet(seed, max) {
 	return randomSet;
 }
 
+// TODO: Add table headers
 // Generate lazypass table html
 function generateLazypass(seed) {
 	var charSet = loadCharacterSet();
