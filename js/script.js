@@ -63,9 +63,34 @@ function csm_Change() {
 	filterCharacterSetOptions(idx);
 }
 
-// TODO: Enable/disable mask options
 function filterCharacterSetOptions(index) {
-	document.title = index;
+	var masks = $("#masks input");
+	var idx;
+	var inputId;
+	var maskName;
+	var label;
+	var input;
+
+	// Enable/disable available mask options
+	for (idx=0; idx<masks.length; idx+=1) {
+		inputId = masks[idx].id;
+		input = $("#"+inputId)[0];
+		maskName = inputId.substr(5-inputId.length);
+		input.disabled = !hasCharacterSetMask(index, maskName);
+	}
+}
+
+function hasCharacterSetMask(index, name) {
+	var currSet = jsonCharSets.charSets[index];
+	var idx;
+	if (currSet.masks) {
+		for (idx=0; idx<currSet.masks.length; idx+=1) {
+			if (currSet.masks[idx].name === name) {
+				return true;
+			}
+		}		
+	}
+	return false;
 }
 
 function loadCharacterSets() {
