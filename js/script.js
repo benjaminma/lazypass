@@ -68,6 +68,7 @@ function csm_Change() {
 	var csm = $("#character-set-menu")[0];
 	var idx = csm.selectedIndex;
 	filterCharacterSetOptions(idx);
+	generateLazypass("");
 }
 
 // TODO: Disable label too
@@ -121,6 +122,7 @@ function isk_KeyUp() {
 }
 
 // Generate lazypass if new seed
+// TODO: or new options (set, masks, etc.)
 var prevSeed = "";
 function checkSecretKey() {
 	var seed = $("#input-secret-key").val();	
@@ -130,6 +132,7 @@ function checkSecretKey() {
 	}
 }
 
+// TODO: Check mask checked value
 function loadCharacterSet() {
 	var charSet = "";
 	var csm = $("#character-set-menu")[0];
@@ -157,7 +160,8 @@ function filterSetByMask(charSet, mask) {
 	if (!mask || mask.length < 1) {
 		return charSet;
 	}
-	
+	var re = new RegExp("["+mask+"]", "g");
+	charSet = charSet.replace(re, "");
 	return charSet;
 }
 
