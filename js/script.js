@@ -44,31 +44,38 @@ var jsonCharSets = {
 	]
 };
 
-window.onload = init;
+window.onload = initLazypass;
 
-function init() {
-	var isk = $("#input-secret-key");
-	isk.keyup(isk_KeyUp);
-	var csm = $("#character-set-menu");
-	csm.change(csm_Change);
-
+function initLazypass() {
+	setupEventHandlers();
 	loadCharacterSets();
 	csm_Change();
 	generateLazypass("");
 }
 
+// TODO: Capture return keypress
+// TODO: Arrow key navigation
+// TODO: Quick numbers/PIN toggle?
+function setupEventHandlers() {
+	var isk = $("#input-secret-key");
+	isk.keyup(isk_KeyUp);
+	var csm = $("#character-set-menu");
+	csm.change(csm_Change);
+}
+
+// Determine masks of selected character set
 function csm_Change() {
 	var csm = $("#character-set-menu")[0];
 	var idx = csm.selectedIndex;
 	filterCharacterSetOptions(idx);
 }
 
+// TODO: Disable label too
 function filterCharacterSetOptions(index) {
 	var masks = $("#masks input");
 	var idx;
 	var inputId;
 	var maskName;
-	var label;
 	var input;
 
 	// Enable/disable available mask options
@@ -93,6 +100,7 @@ function hasCharacterSetMask(index, name) {
 	return false;
 }
 
+// Add character set options to menu
 function loadCharacterSets() {
 	var csm = $("#character-set-menu");
 	var html = "";
@@ -105,14 +113,16 @@ function loadCharacterSets() {
 	csm.html(html);
 }
 
+// Determine when input "stops"
 var timerKeyUp = 0;
 function isk_KeyUp() {
 	clearTimeout(timerKeyUp);
 	timerKeyUp = setTimeout(checkSecretKey, 333);
 }
 
+// Generate lazypass if new seed
 var prevSeed = "";
-function checkSecretKey() {	
+function checkSecretKey() {
 	var seed = $("#input-secret-key").val();	
 	if (seed !== prevSeed) {
 		generateLazypass(seed);
@@ -120,18 +130,18 @@ function checkSecretKey() {
 	}
 }
 
-// TODO: Select character set
-// TODO: Filter user options (lower case, numbers, look-a-likes)
+// TODO: Load character set
+// TODO: Filter set by user options
 function loadCharacterSet() {
-	var charSet = "abcd1234"
-	return charSet.toUpperCase();
+	var charSet = "abc";
+	return charSet;
 }
 
 // TODO: Preview character set if seed matches placeholder
 function generateRandomSet(seed, max) {
 	var randomSet = [];
 	if (seed === "") {
-		// Preview character set
+		// Nonrandom to preview character set
 		for (idx=0; idx<100; idx+=1) {
 			randomSet[idx] = idx % max;
 		}		
@@ -145,10 +155,12 @@ function generateRandomSet(seed, max) {
 	return randomSet;
 }
 
+// Generate lazypass table html
 function generateLazypass(seed) {
 	var charSet = loadCharacterSet();
 	var randomSet = generateRandomSet(seed, charSet.length);
 
+	// Clear table
 	var holder = $("#lp-holder");
 	if (holder.children()) {
 		holder.children().remove();
