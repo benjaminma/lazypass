@@ -57,10 +57,23 @@ function initLazypass() {
 function setupEventHandlers() {
 	var isk = $("#input-secret-key");
 	isk.bind("keyup", isk_KeyUp);
+	isk.bind("keypress", isk_KeyPress);
 	var csm = $("#character-set-menu");
 	csm.bind("change", csm_Change);
 	var masks = $("#masks");
 	masks.bind("change", mask_Change);
+}
+
+// Disable enter/return keypress
+function isk_KeyPress(e) {
+	var key;
+	if (window.event) {
+		key = window.event.keyCode; //IE
+	}
+	else {
+		key = e.which; //FF
+	}
+	return (key != 13);
 }
 
 // Determine masks of selected character set
