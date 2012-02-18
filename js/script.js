@@ -50,7 +50,6 @@ function initLazypass() {
 	setupEventHandlers();
 	loadCharacterSets();
 	csm_Change();
-	generateLazypass("");
 }
 
 // TODO: Capture return keypress
@@ -61,7 +60,7 @@ function setupEventHandlers() {
 	var csm = $("#character-set-menu");
 	csm.bind("change", csm_Change);
 	var masks = $("#masks");
-	masks.bind("change", checkSecretKey);
+	masks.bind("change", mask_Change);
 }
 
 // Determine masks of selected character set
@@ -69,6 +68,12 @@ function csm_Change() {
 	var csm = $("#character-set-menu")[0];
 	var idx = csm.selectedIndex;
 	filterCharacterSetOptions(idx);
+	$("form").data("changed", true);
+	checkSecretKey();
+}
+
+function mask_Change() {
+	$("form").data("changed", true);
 	checkSecretKey();
 }
 
@@ -122,15 +127,12 @@ function isk_KeyUp() {
 	timerKeyUp = setTimeout(checkSecretKey, 333);
 }
 
-// Generate lazypass if new seed
-// TODO: or new options (set, masks, etc.)
-var prevSeed = "";
+// Generate lazypass if form changed
 function checkSecretKey() {
-	var seed = $("#input-secret-key")[0].value;	
-//	if (seed !== prevSeed) {
+	var seed = $("#input-secret-key")[0].value;
+	if ($("form").data("changed")) {
 		generateLazypass(seed);
-		prevSeed = seed;	
-//	}
+	}
 }
 
 function loadCharacterSet() {
