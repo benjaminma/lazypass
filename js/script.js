@@ -3,7 +3,7 @@ var jsonCharSets = {
 	"charSets": [
 		{
 			"name": "English alphabet",
-			"set": "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890",
+			"set": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890",
 			"masks": [
 				{
 					"name": "numbers",
@@ -21,7 +21,7 @@ var jsonCharSets = {
 		},
 		{
 			"name": "QWERTY left hand",
-			"set": "QqWwEeRrTtAaSsDdFfGgZzXxCcVvBb12345",			
+			"set": "QWERTASDFGZXCVBqwertasdfgzxcvb12345",			
 			"masks": [
 				{
 					"name": "numbers",
@@ -54,13 +54,14 @@ function initLazypass() {
 }
 
 // TODO: Capture return keypress
-// TODO: Arrow key navigation
 // TODO: Quick numbers/PIN toggle?
 function setupEventHandlers() {
 	var isk = $("#input-secret-key");
-	isk.keyup(isk_KeyUp);
+	isk.bind("keyup", isk_KeyUp);
 	var csm = $("#character-set-menu");
-	csm.change(csm_Change);
+	csm.bind("change", csm_Change);
+	var masks = $("#masks");
+	masks.bind("change", checkSecretKey);
 }
 
 // Determine masks of selected character set
@@ -68,7 +69,7 @@ function csm_Change() {
 	var csm = $("#character-set-menu")[0];
 	var idx = csm.selectedIndex;
 	filterCharacterSetOptions(idx);
-	generateLazypass("");
+	checkSecretKey();
 }
 
 // TODO: Disable label too
@@ -125,14 +126,13 @@ function isk_KeyUp() {
 // TODO: or new options (set, masks, etc.)
 var prevSeed = "";
 function checkSecretKey() {
-	var seed = $("#input-secret-key").val();	
-	if (seed !== prevSeed) {
+	var seed = $("#input-secret-key")[0].value;	
+//	if (seed !== prevSeed) {
 		generateLazypass(seed);
 		prevSeed = seed;	
-	}
+//	}
 }
 
-// TODO: Check mask checked value
 function loadCharacterSet() {
 	var charSet = "";
 	var csm = $("#character-set-menu")[0];
@@ -141,12 +141,17 @@ function loadCharacterSet() {
 	charSet = currSet.set;
 
 	// Filter set by user options
+	var maskName;
 	var mask;
 	var jdx;
 	if (currSet.masks) {
 		for (jdx=0; jdx<currSet.masks.length; jdx+=1) {
+			maskName = currSet.masks[jdx].name;
 			mask = currSet.masks[jdx].mask;
-			charSet = filterSetByMask(charSet, mask);
+			checkbox = $("#mask-"+maskName)[0];
+			if (checkbox && !checkbox.checked) {
+				charSet = filterSetByMask(charSet, mask);			
+			}
 		}		
 	}
 
@@ -168,9 +173,9 @@ function filterSetByMask(charSet, mask) {
 // TODO: Preview character set if seed matches placeholder
 function generateRandomSet(seed, max) {
 	var randomSet = [];
-	if (seed === "") {
+	if (!seed || seed === "") {
 		// Nonrandom to preview character set
-		for (idx=0; idx<100; idx+=1) {
+		for (idx=0; idx<81; idx+=1) {
 			randomSet[idx] = idx % max;
 		}		
 	}
