@@ -52,7 +52,7 @@ function initLazypass() {
 	csm_Change();
 }
 
-// TODO: Capture return keypress
+// TODO: Arrow key navigation?
 // TODO: Quick numbers/PIN toggle?
 function setupEventHandlers() {
 	var isk = $("#input-secret-key");
@@ -185,10 +185,11 @@ function filterSetByMask(charSet, mask) {
 	return charSet;
 }
 
-// TODO: Preview character set if seed matches placeholder
 function generateRandomSet(seed, max) {
 	var randomSet = [];
-	if (!seed || seed === "") {
+	var isk = $("#input-secret-key");
+	var placeholder = isk.attr("placeholder");
+	if (!seed || seed === "" || seed === placeholder) {
 		// Nonrandom to preview character set
 		for (idx=0; idx<81; idx+=1) {
 			randomSet[idx] = idx % max;
