@@ -204,7 +204,6 @@ function generateRandomSet(seed, max) {
 	return randomSet;
 }
 
-// TODO: Add table headers
 // Generate lazypass table html
 function generateLazypass(seed) {
 	var charSet = loadCharacterSet();
@@ -217,11 +216,49 @@ function generateLazypass(seed) {
 	}
 
 	// Build lazypass table
-	var html = "<table><tbody>"
+	var html = "<table border=1><tbody>"
 	var currChar;
 	var jdx;
+
+	// First row headers
+	var thSet = "ABCDEFGHIJKLM12345NOPQRSTUVWXYZ67890";
+	html += "<tr><th></th>";
+	var m = -1;
+	var n;
+	for (n=0; n<9; n+=1) {
+		html += "<th><table><tbody>";
+		html += "<tr><th>";
+		html += thSet[++m];
+		html += "</th><th>";
+		html += thSet[++m];
+		html += "</th></tr>";
+		html += "<tr><th>";
+		html += thSet[m+17];
+		html += "</th><th>";
+		html += thSet[m+18];
+		html += "</th></tr>";
+		html += "</tbody></table></th>";
+	}
+	html += "</tr>";
+
+	m = -1;
 	for (idx=0; idx<9; idx+=1) {
 		html += "<tr>";
+
+		// First col headers
+		html += "<th><table><tbody>";
+		html += "<tr><th>";
+		html += thSet[++m];
+		html += "</th><th>";
+		html += thSet[m+18];
+		html += "</th></tr>";
+		html += "<tr><th>";
+		html += thSet[++m];
+		html += "</th><th>";
+		html += thSet[m+18];
+		html += "</th></tr>";
+		html += "</tbody></table></th>";
+
 		for (jdx=0; jdx<9; jdx+=1) {
 			currChar = charSet[randomSet[idx*9+jdx]];
 			html += "<td>";
