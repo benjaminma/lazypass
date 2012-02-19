@@ -205,17 +205,17 @@ td { vertical-align: center; }
    ========================================================================== */
 
 body {
-  color: #444;
+  color: #333;
+  background-color: #fefef9;
   font-family: monospace;
 }
 
 table, th, td {
-  border: 0px solid #444;
   border-collapse: collapse;
   border-spacing: 0;
   text-align: center;
   vertical-align: center;
-  line-height: 80%;
+  line-height: 100%;
   padding: 0;
 }
 
@@ -231,59 +231,40 @@ table.center {
 th {
   font-size: 130%;
   font-weight: normal;
-  width: 2.5em;
+  width: 2.4em;
   height: 1em;
 }
 
 td {
+  border: 1px solid #999;
   font-size: 300%;
   width: 1em;
   height: 1em;
 }
-/*
- 16 10
- 32 20
- 48 30
- 64 40
- 80 50
- 96 60
-112 70
-128 80
-144 90
-160 A0
-176 B0
-192 C0
-208 D0
-224 E0
-240 F0
 
-f6f9fb
-e6ebf0
-e6ebeb
-d6d9f0
-*/
-
-/* table data */
-div > table > tbody > tr:nth-child(even) {
-  background-color: #0ff;  
+#lp-holder > table > tbody > tr:nth-child(even) {
+  background-color: #fefef9;  
 }
-div > table {
-  background-color: #f0f;
+#lp-holder > table {
+  border: 1px solid #999;
+  background-color: #f0f1f2;
+}
+#lp-holder > table > tbody > tr {
+  border: 1px solid #999;
+}  
+
+#lp-holder > table > tbody > tr:nth-child(1) > th:nth-child(odd),
+#lp-holder > table > tbody > tr:nth-child(1) > th:nth-child(even) {
+  border: 1px solid #999;
+  background-color: #bcd;
+}
+#lp-holder > table > tbody > tr:nth-child(odd) > th {
+  background-color: #bcd;  
+}
+#lp-holder > table > tbody > tr:nth-child(even) > th {
+  background-color: #bcd;  
 }
 
-/* table headers */
-div > table > tbody > tr {
-  background-color: #00f;
-}
-th:nth-child(2n+3) {
-  background-color: #0f0;
-} 
-tr:nth-child(2n+3) > th {
-  background-color: #f00;
-}
-div > table > tbody > tr:nth-child(1) {
-  background-color: #d6d9f0;  
-}
 
 /*
  * Media queries for responsive design github.com/h5bp/mobile-boilerplate/wiki/The-Style
