@@ -195,9 +195,10 @@ input:invalid, textarea:invalid { background-color: #f0dddd; }
    Tables
    ========================================================================== */
 
-table { border-collapse: collapse; border-spacing: 0; }
+/*table { border-collapse: collapse; border-spacing: 0; 
+}
 td { vertical-align: center; }
-
+*/
 
 /* ==|== primary styles =====================================================
    Author: Ben Ma
@@ -209,10 +210,17 @@ body {
 }
 
 table, th, td {
-  border: 1px solid #0f0;
+  border: 0px solid #444;
+  border-collapse: collapse;
+  border-spacing: 0;
   text-align: center;
   vertical-align: center;
-  line-height: 70%;
+  line-height: 80%;
+  padding: 0;
+}
+
+th > table {
+  width: 100%;
 }
 
 table.center {
@@ -221,28 +229,60 @@ table.center {
 }
 
 th {
-  background-color: #f00;
-  font-size: 133%;
+  font-size: 130%;
   font-weight: normal;
-  width: 1em;
+  width: 2.5em;
+  height: 1em;
 }
 
 td {
   font-size: 300%;
   width: 1em;
-  height: 0.9em;
+  height: 1em;
+}
+/*
+ 16 10
+ 32 20
+ 48 30
+ 64 40
+ 80 50
+ 96 60
+112 70
+128 80
+144 90
+160 A0
+176 B0
+192 C0
+208 D0
+224 E0
+240 F0
+
+f6f9fb
+e6ebf0
+e6ebeb
+d6d9f0
+*/
+
+/* table data */
+div > table > tbody > tr:nth-child(even) {
+  background-color: #0ff;  
+}
+div > table {
+  background-color: #f0f;
 }
 
-tr:nth-child(even) {
-  background-color: #08f;  
-}
-
-th > table:nth-child(even) td {
+/* table headers */
+div > table > tbody > tr {
   background-color: #00f;
 }
-
-div > table {
-  background-color: #888;
+th:nth-child(2n+3) {
+  background-color: #0f0;
+} 
+tr:nth-child(2n+3) > th {
+  background-color: #f00;
+}
+div > table > tbody > tr:nth-child(1) {
+  background-color: #d6d9f0;  
 }
 
 /*
