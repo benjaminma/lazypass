@@ -216,7 +216,7 @@ function generateLazypass(seed) {
 	}
 
 	// Build lazypass table
-	var html = "<table border=1><tbody>"
+	var html = "<table class=\"center\"><tbody>"
 	var currChar;
 	var jdx;
 
@@ -226,7 +226,7 @@ function generateLazypass(seed) {
 	var m = -1;
 	var n;
 	for (n=0; n<9; n+=1) {
-		html += "<th><table><tbody>";
+		html += "<th><table class=\"center\"><tbody>";
 		html += "<tr><th>";
 		html += thSet[++m];
 		html += "</th><th>";

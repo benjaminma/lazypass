@@ -196,27 +196,54 @@ input:invalid, textarea:invalid { background-color: #f0dddd; }
    ========================================================================== */
 
 table { border-collapse: collapse; border-spacing: 0; }
-td { vertical-align: top; }
+td { vertical-align: center; }
 
 
 /* ==|== primary styles =====================================================
-   Author:
+   Author: Ben Ma
    ========================================================================== */
 
+body {
+  color: #444;
+  font-family: monospace;
+}
 
+table, th, td {
+  border: 1px solid #0f0;
+  text-align: center;
+  vertical-align: center;
+  line-height: 70%;
+}
 
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
 
+th {
+  background-color: #f00;
+  font-size: 133%;
+  font-weight: normal;
+  width: 1em;
+}
 
+td {
+  font-size: 300%;
+  width: 1em;
+  height: 0.9em;
+}
 
+tr:nth-child(even) {
+  background-color: #08f;  
+}
 
+th > table:nth-child(even) td {
+  background-color: #00f;
+}
 
-
-
-
-
-
-
-
+div > table {
+  background-color: #888;
+}
 
 /*
  * Media queries for responsive design github.com/h5bp/mobile-boilerplate/wiki/The-Style
