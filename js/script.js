@@ -191,9 +191,12 @@ function generateRandomSet(seed, max) {
 	var placeholder = isk.attr("placeholder");
 	if (!seed || seed === "" || seed === placeholder) {
 		// Nonrandom to preview character set
-		for (idx=0; idx<81; idx+=1) {
-			randomSet[idx] = idx % max;
+		for (idx=0; idx<max; idx+=1) {
+			randomSet[idx] = idx;
 		}		
+		for (idx=max; idx<81; idx+=1) {
+			randomSet[idx] = 0;
+		}
 	}
 	else {
 		Math.seedrandom(seed);
