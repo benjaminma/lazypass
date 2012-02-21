@@ -207,7 +207,7 @@ td { vertical-align: center; }
 body {
   color: #333;
   background-color: #fefef9;
-  font-family: monospace;
+  font-family: "Cousine", monospace;
 }
 
 table, th, td {
@@ -229,40 +229,38 @@ table.center {
 }
 
 th {
-  font-size: 130%;
+  font-size: 125%;
   font-weight: normal;
-  width: 2.4em;
-  height: 1em;
+  width: 2.5em;
 }
 
 td {
-  border: 1px solid #999;
-  font-size: 300%;
+  border: 1px solid #bcd;
+  font-size: 250%;
   width: 1em;
-  height: 1em;
 }
 
 #lp-holder > table > tbody > tr:nth-child(even) {
   background-color: #fefef9;  
 }
 #lp-holder > table {
-  border: 1px solid #999;
-  background-color: #f0f1f2;
+  border: 1px solid #bcd;
+  background-color: #E8EDF0;
 }
 #lp-holder > table > tbody > tr {
-  border: 1px solid #999;
+  border: 1px solid #bcd;
 }  
 
 #lp-holder > table > tbody > tr:nth-child(1) > th:nth-child(odd),
 #lp-holder > table > tbody > tr:nth-child(1) > th:nth-child(even) {
-  border: 1px solid #999;
-  background-color: #bcd;
+  border: 1px solid #bcd;
+  background-color: #D1DDE6;
 }
 #lp-holder > table > tbody > tr:nth-child(odd) > th {
-  background-color: #bcd;  
+  background-color: #D1DDE6;  
 }
 #lp-holder > table > tbody > tr:nth-child(even) > th {
-  background-color: #bcd;  
+  background-color: #D1DDE6;  
 }
 
 
